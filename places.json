@@ -1,0 +1,28 @@
+{
+  "places": [
+    {
+      "name": "Westgate Mall",
+      "category": "Shopping",
+      "lat": -1.2531,
+      "lon": 36.8155
+    },
+    {
+      "name": "Carnivore Restaurant",
+      "category": "Restaurant",
+      "lat": -1.3307,
+      "lon": 36.8155
+    },
+    {
+      "name": "K1 Klub House",
+      "category": "Nightlife",
+      "lat": -1.2667,
+      "lon": 36.8000
+    },
+    {
+      "name": "Karen Blixen Museum",
+      "category": "Living / Culture",
+      "lat": -1.3482,
+      "lon": 36.7180
+    }
+  ]
+}
