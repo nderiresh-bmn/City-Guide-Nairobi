@@ -2,23 +2,51 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background: #f4f4f4;
+  color: #333;
 }
 
 header {
-  background: #008080;
-  color: white;
+  background: #2c3e50;
+  color: #fff;
   padding: 1rem;
   text-align: center;
 }
 
-nav a {
-  margin: 0 1rem;
-  color: white;
-  text-decoration: none;
+nav {
+  margin-top: 0.5rem;
 }
 
-#mapid {
+nav button {
+  margin: 0.2rem;
+  padding: 0.5rem 1rem;
+  background: #34495e;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+nav button:hover {
+  background: #1abc9c;
+}
+
+.tab-content {
+  display: none;
+  padding: 1rem;
+  background: #fff;
+  margin: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.tab-content.active {
+  display: block;
+}
+
+#map {
   height: 500px;
-  margin: 20px;
-  border-radius: 10px;
+  margin: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
