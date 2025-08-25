@@ -1,38 +1,24 @@
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
-  line-height: 1.6;
-  background: #f9f9f9;
+  margin: 0;
+  padding: 0;
 }
 
 header {
-  background: #1a4d2e;
+  background: #008080;
   color: white;
   padding: 1rem;
   text-align: center;
 }
 
 nav a {
+  margin: 0 1rem;
   color: white;
-  margin: 0 10px;
   text-decoration: none;
 }
 
-main {
-  padding: 1.5rem;
-}
-
-section {
-  margin-bottom: 2rem;
-}
-
-#nairobiMap {
+#mapid {
   height: 500px;
-  width: 100%;
-  margin-top: 1rem;
-  border: 2px solid #ddd;
-}
-
-.map-filters {
-  margin-bottom: 10px;
+  margin: 20px;
+  border-radius: 10px;
 }
