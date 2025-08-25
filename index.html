@@ -2,75 +2,62 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nairobi City Guide</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
   <header>
     <h1>Nairobi City Guide</h1>
     <nav>
-      <ul>
-        <li><a href="#nightlife">Nightlife</a></li>
-        <li><a href="#restaurants">Restaurants</a></li>
-        <li><a href="#rentals">Rentals</a></li>
-        <li><a href="#itinerary">Itinerary</a></li>
-        <li><a href="https://nairobicityguide.blogspot.com/" target="_blank">Blog</a></li>
-        <li><a href="#contacts">Contacts</a></li>
-      </ul>
+      <button class="tab-btn" data-tab="living">Living</button>
+      <button class="tab-btn" data-tab="shopping">Shopping</button>
+      <button class="tab-btn" data-tab="restaurants">Restaurants</button>
+      <button class="tab-btn" data-tab="nightlife">Nightlife</button>
+      <button class="tab-btn" data-tab="news">News</button>
+      <button class="tab-btn" data-tab="contact">Contact</button>
     </nav>
   </header>
 
   <main>
-    <section id="nightlife">
-      <h2>Nightlife</h2>
-      <ul>
-        <li>Cavalli</li>
-        <li>Replay</li>
-        <li>Wine & Bottle</li>
-        <li>K1 Club</li>
-        <li>Burudani Address</li>
-        <li>Molly's</li>
-        <li>Bla Bla</li>
-        <li>Nairobi Street Kitchen</li>
-      </ul>
+    <section id="living" class="tab-content active">
+      <h2>Living in Nairobi</h2>
+      <p>Find the best neighborhoods, housing options, and lifestyle tips for Nairobi.</p>
     </section>
 
-    <section id="restaurants">
+    <section id="shopping" class="tab-content">
+      <h2>Shopping</h2>
+      <p>Discover top malls, boutiques, and local markets around Nairobi.</p>
+    </section>
+
+    <section id="restaurants" class="tab-content">
       <h2>Restaurants</h2>
-      <ul>
-        <li>Hyatt Regency</li>
-        <li>Romo House Restaurant</li>
-      </ul>
+      <p>Explore Nairobi’s diverse food scene, from street eats to fine dining.</p>
     </section>
 
-    <section id="rentals">
-      <h2>Rentals</h2>
-      <ul>
-        <li>Taarifa Serviced Apartments</li>
-        <li>Broadwalk Mall & Residence</li>
-      </ul>
+    <section id="nightlife" class="tab-content">
+      <h2>Nightlife</h2>
+      <p>Bars, lounges, and clubs where Nairobi comes alive at night.</p>
     </section>
 
-    <section id="itinerary">
-      <h2>Itinerary</h2>
-      <p>Coming soon! A detailed breakdown of Nairobi experiences.</p>
+    <section id="news" class="tab-content">
+      <h2>City News & Blog</h2>
+      <iframe src="https://nairobicityguide.blogspot.com/" 
+              style="width:100%; height:600px; border:none;">
+      </iframe>
     </section>
 
-    <section id="contacts">
-      <h2>Contacts</h2>
-      <p>📧 Email us at: 
-        <a href="mailto:infotroystrategic@gmail.com">infotroystrategic@gmail.com</a>
-      </p>
+    <section id="contact" class="tab-content">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:infotroystrategic@gmail.com">infotroystrategic@gmail.com</a></p>
+    </section>
+
+    <section id="map-section">
+      <h2>Interactive Map</h2>
+      <div id="map"></div>
     </section>
   </main>
-
-  <footer>
-    <p>&copy; 2025 Nairobi City Guide | Contact: 
-      <a href="mailto:infotroystrategic@gmail.com">infotroystrategic@gmail.com</a>
-    </p>
-  </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
