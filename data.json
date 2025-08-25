@@ -1,0 +1,30 @@
+{
+  "news": [
+    {
+      "title": "Nairobi Night Economy Expands",
+      "content": "New venues are reshaping Nairobi’s social life with vibrant nightlife and food culture."
+    }
+  ],
+  "restaurants": [
+    { "name": "Hyatt Regency" },
+    { "name": "Romo House Restaurant" }
+  ],
+  "nightlife": [
+    { "name": "Cavalli" },
+    { "name": "Replay" },
+    { "name": "Wine & Bottle" },
+    { "name": "K1 Club" },
+    { "name": "Burudani Address" },
+    { "name": "Molly's" },
+    { "name": "Bla Bla" },
+    { "name": "Nairobi Street Kitchen" }
+  ],
+  "rentals": [
+    { "name": "Taarifa Serviced Apartments" },
+    { "name": "Broadwalk Mall and Residence" }
+  ],
+  "arts_culture": [
+    { "name": "GoDown Arts Centre" },
+    { "name": "Alliance Française Nairobi" }
+  ]
+}
