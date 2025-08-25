@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>City Guide Nairobi</title>
+  <!-- Link to CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Leaflet CSS for map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+  <header>
+    <h1>City Guide Nairobi</h1>
+    <nav>
+      <ul>
+        <li><a href="#news">News</a></li>
+        <li><a href="#traffic">Traffic</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#culture">Culture</a></li>
+        <li><a href="#itinerary">Itinerary</a></li>
+        <li><a href="#map">Map</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="news">
+      <h2>News</h2>
+      <p>Latest Nairobi news will go here...</p>
+    </section>
+
+    <section id="traffic">
+      <h2>Traffic Updates</h2>
+      <p>Live traffic updates coming soon...</p>
+    </section>
+
+    <section id="reviews">
+      <h2>Restaurant Reviews</h2>
+      <p>Top restaurants and dining spots...</p>
+    </section>
+
+    <section id="culture">
+      <h2>Arts & Culture</h2>
+      <p>Discover Nairobi’s creative scene...</p>
+    </section>
+
+    <section id="itinerary">
+      <h2>Tourist Itinerary</h2>
+      <p>Plan your Nairobi adventure...</p>
+    </section>
+
+    <section id="map">
+      <h2>Explore Nairobi</h2>
+      <div id="mapid"></div>
+      <div class="map-filters">
+        <button onclick="toggleLayer('spots')">Tourist Spots</button>
+        <button onclick="toggleLayer('restaurants')">Restaurants</button>
+        <button onclick="toggleLayer('nightlife')">Nightlife</button>
+        <button onclick="toggleLayer('accommodation')">Accommodation</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 City Guide Nairobi</p>
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Custom JS -->
+  <script src="js/script.js"></script>
+</body>
+</html>
