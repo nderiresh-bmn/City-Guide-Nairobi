@@ -67,6 +67,113 @@
   </footer>
 
   <!-- Leaflet JS -->
+
+  body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background: #f9f9f9;
+}
+
+header {
+  background: #1a4d2e;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+main {
+  padding: 1.5rem;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+#nairobiMap {
+  height: 500px;
+  width: 100%;
+  margin-top: 1rem;
+  border: 2px solid #ddd;
+}
+
+.map-filters {
+  margin-bottom: 10px;
+}
+
+  // Tourist, restaurant, nightlife, rental spots in Nairobi
+const spots = [
+  {
+    name: "Nairobi National Park",
+    type: "tourist",
+    hours: "6:00 AM - 6:00 PM",
+    coords: [-1.3733, 36.8580]
+  },
+  {
+    name: "Giraffe Centre",
+    type: "tourist",
+    hours: "9:00 AM - 5:00 PM",
+    coords: [-1.4216, 36.7719]
+  },
+  {
+    name: "Carnivore Restaurant",
+    type: "restaurant",
+    hours: "12:00 PM - 11:00 PM",
+    coords: [-1.3325, 36.8190]
+  },
+  {
+    name: "Alchemist Bar",
+    type: "nightlife",
+    hours: "4:00 PM - 2:00 AM",
+    coords: [-1.2644, 36.7990]
+  },
+  {
+    name: "Airbnb – Kilimani Apartment",
+    type: "rental",
+    hours: "Check-in 2 PM",
+    coords: [-1.2921, 36.7836]
+  }
+];
+
+  // Initialize Map
+const map = L.map('nairobiMap').setView([-1.286389, 36.817223], 12);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+}).addTo(map);
+
+// Create Layer Groups
+const layers = {
+  tourist: L.layerGroup().addTo(map),
+  restaurant: L.layerGroup().addTo(map),
+  nightlife: L.layerGroup().addTo(map),
+  rental: L.layerGroup().addTo(map),
+};
+
+// Add markers
+spots.forEach(spot => {
+  const marker = L.marker(spot.coords)
+    .bindPopup(`<b>${spot.name}</b><br>Hours: ${spot.hours}`);
+  layers[spot.type].addLayer(marker);
+});
+
+// Toggle filters
+document.querySelectorAll('.map-filters input').forEach(input => {
+  input.addEventListener('change', (e) => {
+    const type = e.target.value;
+    if (e.target.checked) {
+      map.addLayer(layers[type]);
+    } else {
+      map.removeLayer(layers[type]);
+    }
+  });
+});
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <!-- Custom JS -->
   <script src="js/script.js"></script>
