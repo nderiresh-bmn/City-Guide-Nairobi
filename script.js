@@ -1,22 +1,24 @@
-async function loadData() {
-  const response = await fetch("data.json");
-  const data = await response.json();
+// Tab switching
+document.querySelectorAll('.tab-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    document.getElementById(button.dataset.tab).classList.add('active');
+  });
+});
 
-  renderSection("news", data.news, item => `
-    <h3>${item.title}</h3>
-    <p>${item.content}</p>
-  `);
+// Initialize OpenStreetMap
+const map = L.map('map').setView([-1.286389, 36.817223], 12);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
 
-  renderSection("restaurants", data.restaurants, item => `<li>${item.name}</li>`);
-  renderSection("nightlife", data.nightlife, item => `<li>${item.name}</li>`);
-  renderSection("rentals", data.rentals, item => `<li>${item.name}</li>`);
-  renderSection("arts_culture", data.arts_culture, item => `<li>${item.name}</li>`);
-}
-
-function renderSection(sectionId, items, templateFn) {
-  const container = document.getElementById(sectionId);
-  if (!container) return;
-  container.innerHTML = items.map(templateFn).join("");
-}
-
-loadData();
+// Load locations from JSON
+fetch('places.json')
+  .then(response => response.json())
+  .then(data => {
+    data.places.forEach(place => {
+      L.marker([place.lat, place.lon])
+        .addTo(map)
+        .bindPopup(`<b>${place.name}</b><br>${place.category}`);
+    });
+  });
