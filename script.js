@@ -1,31 +1,22 @@
-// Initialize map
-const map = L.map('mapid').setView([-1.2921, 36.8219], 12);
+async function loadData() {
+  const response = await fetch("data.json");
+  const data = await response.json();
 
-// Load map tiles
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 18,
-}).addTo(map);
+  renderSection("news", data.news, item => `
+    <h3>${item.title}</h3>
+    <p>${item.content}</p>
+  `);
 
-// Layers for filters
-const layers = {
-  tourist: L.layerGroup(),
-  restaurants: L.layerGroup(),
-  nightlife: L.layerGroup(),
-  rentals: L.layerGroup()
-};
-
-// Example markers
-L.marker([-1.2921, 36.8219]).bindPopup("Nairobi National Museum<br>9am - 5pm").addTo(layers.tourist);
-L.marker([-1.3733, 36.8580]).bindPopup("Nairobi National Park<br>6am - 6pm").addTo(layers.tourist);
-L.marker([-1.2833, 36.8167]).bindPopup("Carnivore Restaurant").addTo(layers.restaurants);
-L.marker([-1.3000, 36.8000]).bindPopup("Kiza Lounge - Nightlife").addTo(layers.nightlife);
-L.marker([-1.3100, 36.8300]).bindPopup("Westlands Airbnb - $50/night").addTo(layers.rentals);
-
-// Toggle layers
-function toggleLayer(type) {
-  if (map.hasLayer(layers[type])) {
-    map.removeLayer(layers[type]);
-  } else {
-    map.addLayer(layers[type]);
-  }
+  renderSection("restaurants", data.restaurants, item => `<li>${item.name}</li>`);
+  renderSection("nightlife", data.nightlife, item => `<li>${item.name}</li>`);
+  renderSection("rentals", data.rentals, item => `<li>${item.name}</li>`);
+  renderSection("arts_culture", data.arts_culture, item => `<li>${item.name}</li>`);
 }
+
+function renderSection(sectionId, items, templateFn) {
+  const container = document.getElementById(sectionId);
+  if (!container) return;
+  container.innerHTML = items.map(templateFn).join("");
+}
+
+loadData();
