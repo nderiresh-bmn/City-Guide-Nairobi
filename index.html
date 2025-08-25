@@ -2,39 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>City Guide Nairobi</title>
-  <!-- Link to CSS -->
+  <title>Nairobi City Guide</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Leaflet CSS for map -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
 </head>
 <body>
-  <header>
-    <h1>City Guide Nairobi</h1>
-    <nav>
-      <a href="#news">News</a>
-      <a href="#traffic">Traffic</a>
-      <a href="#restaurants">Restaurants</a>
-      <a href="#arts">Arts & Culture</a>
-      <a href="#map">Interactive Map</a>
-      <a href="#itinerary">Itinerary</a>
-    </nav>
-  </header>
+  <h1>Nairobi City Guide</h1>
 
-  <section id="map">
-    <h2>Explore Nairobi</h2>
-    <div id="mapid"></div>
-    <div class="filters">
-      <button onclick="toggleLayer('tourist')">Tourist Spots</button>
-      <button onclick="toggleLayer('restaurants')">Restaurants</button>
-      <button onclick="toggleLayer('nightlife')">Nightlife</button>
-      <button onclick="toggleLayer('rentals')">Rentals</button>
-    </div>
+  <section>
+    <h2>News</h2>
+    <div id="news"></div>
   </section>
 
-  <!-- Leaflet JS + our script -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <section>
+    <h2>Restaurants</h2>
+    <ul id="restaurants"></ul>
+  </section>
+
+  <section>
+    <h2>Nightlife</h2>
+    <ul id="nightlife"></ul>
+  </section>
+
+  <section>
+    <h2>Rentals</h2>
+    <ul id="rentals"></ul>
+  </section>
+
+  <section>
+    <h2>Arts & Culture</h2>
+    <ul id="arts_culture"></ul>
+  </section>
+
   <script src="script.js"></script>
 </body>
 </html>
