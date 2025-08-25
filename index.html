@@ -5,177 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>City Guide Nairobi</title>
   <!-- Link to CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css">
   <!-- Leaflet CSS for map -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
 </head>
 <body>
   <header>
     <h1>City Guide Nairobi</h1>
     <nav>
-      <ul>
-        <li><a href="#news">News</a></li>
-        <li><a href="#traffic">Traffic</a></li>
-        <li><a href="#reviews">Reviews</a></li>
-        <li><a href="#culture">Culture</a></li>
-        <li><a href="#itinerary">Itinerary</a></li>
-        <li><a href="#map">Map</a></li>
-      </ul>
+      <a href="#news">News</a>
+      <a href="#traffic">Traffic</a>
+      <a href="#restaurants">Restaurants</a>
+      <a href="#arts">Arts & Culture</a>
+      <a href="#map">Interactive Map</a>
+      <a href="#itinerary">Itinerary</a>
     </nav>
   </header>
 
-  <main>
-    <section id="news">
-      <h2>News</h2>
-      <p>Latest Nairobi news will go here...</p>
-    </section>
+  <section id="map">
+    <h2>Explore Nairobi</h2>
+    <div id="mapid"></div>
+    <div class="filters">
+      <button onclick="toggleLayer('tourist')">Tourist Spots</button>
+      <button onclick="toggleLayer('restaurants')">Restaurants</button>
+      <button onclick="toggleLayer('nightlife')">Nightlife</button>
+      <button onclick="toggleLayer('rentals')">Rentals</button>
+    </div>
+  </section>
 
-    <section id="traffic">
-      <h2>Traffic Updates</h2>
-      <p>Live traffic updates coming soon...</p>
-    </section>
-
-    <section id="reviews">
-      <h2>Restaurant Reviews</h2>
-      <p>Top restaurants and dining spots...</p>
-    </section>
-
-    <section id="culture">
-      <h2>Arts & Culture</h2>
-      <p>Discover Nairobi’s creative scene...</p>
-    </section>
-
-    <section id="itinerary">
-      <h2>Tourist Itinerary</h2>
-      <p>Plan your Nairobi adventure...</p>
-    </section>
-
-    <section id="map">
-      <h2>Explore Nairobi</h2>
-      <div id="mapid"></div>
-      <div class="map-filters">
-        <button onclick="toggleLayer('spots')">Tourist Spots</button>
-        <button onclick="toggleLayer('restaurants')">Restaurants</button>
-        <button onclick="toggleLayer('nightlife')">Nightlife</button>
-        <button onclick="toggleLayer('accommodation')">Accommodation</button>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 City Guide Nairobi</p>
-  </footer>
-
-  <!-- Leaflet JS -->
-
-  body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  background: #f9f9f9;
-}
-
-header {
-  background: #1a4d2e;
-  color: white;
-  padding: 1rem;
-  text-align: center;
-}
-
-nav a {
-  color: white;
-  margin: 0 10px;
-  text-decoration: none;
-}
-
-main {
-  padding: 1.5rem;
-}
-
-section {
-  margin-bottom: 2rem;
-}
-
-#nairobiMap {
-  height: 500px;
-  width: 100%;
-  margin-top: 1rem;
-  border: 2px solid #ddd;
-}
-
-.map-filters {
-  margin-bottom: 10px;
-}
-
-  // Tourist, restaurant, nightlife, rental spots in Nairobi
-const spots = [
-  {
-    name: "Nairobi National Park",
-    type: "tourist",
-    hours: "6:00 AM - 6:00 PM",
-    coords: [-1.3733, 36.8580]
-  },
-  {
-    name: "Giraffe Centre",
-    type: "tourist",
-    hours: "9:00 AM - 5:00 PM",
-    coords: [-1.4216, 36.7719]
-  },
-  {
-    name: "Carnivore Restaurant",
-    type: "restaurant",
-    hours: "12:00 PM - 11:00 PM",
-    coords: [-1.3325, 36.8190]
-  },
-  {
-    name: "Alchemist Bar",
-    type: "nightlife",
-    hours: "4:00 PM - 2:00 AM",
-    coords: [-1.2644, 36.7990]
-  },
-  {
-    name: "Airbnb – Kilimani Apartment",
-    type: "rental",
-    hours: "Check-in 2 PM",
-    coords: [-1.2921, 36.7836]
-  }
-];
-
-  // Initialize Map
-const map = L.map('nairobiMap').setView([-1.286389, 36.817223], 12);
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 19,
-}).addTo(map);
-
-// Create Layer Groups
-const layers = {
-  tourist: L.layerGroup().addTo(map),
-  restaurant: L.layerGroup().addTo(map),
-  nightlife: L.layerGroup().addTo(map),
-  rental: L.layerGroup().addTo(map),
-};
-
-// Add markers
-spots.forEach(spot => {
-  const marker = L.marker(spot.coords)
-    .bindPopup(`<b>${spot.name}</b><br>Hours: ${spot.hours}`);
-  layers[spot.type].addLayer(marker);
-});
-
-// Toggle filters
-document.querySelectorAll('.map-filters input').forEach(input => {
-  input.addEventListener('change', (e) => {
-    const type = e.target.value;
-    if (e.target.checked) {
-      map.addLayer(layers[type]);
-    } else {
-      map.removeLayer(layers[type]);
-    }
-  });
-});
+  <!-- Leaflet JS + our script -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <!-- Custom JS -->
-  <script src="js/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
