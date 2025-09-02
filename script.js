@@ -1,24 +1,19 @@
-// Tab switching
-document.querySelectorAll('.tab-btn').forEach(button => {
-  button.addEventListener('click', () => {
-    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-    document.getElementById(button.dataset.tab).classList.add('active');
-  });
+document.getElementById('review-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const name = document.getElementById('review-name').value.trim();
+  const category = document.getElementById('review-category').value;
+  const text = document.getElementById('review-text').value.trim();
+
+  if (!name || !category || !text) return;
+
+  const reviewHTML = `
+    <div class="review">
+      <div class="review-header">${name}</div>
+      <div class="review-category">${category}</div>
+      <div class="review-text">${text}</div>
+    </div>
+  `;
+  document.getElementById('reviews-list').insertAdjacentHTML('afterbegin', reviewHTML);
+
+  document.getElementById('review-form').reset();
 });
-
-// Initialize OpenStreetMap
-const map = L.map('map').setView([-1.286389, 36.817223], 12);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
-
-// Load locations from JSON
-fetch('places.json')
-  .then(response => response.json())
-  .then(data => {
-    data.places.forEach(place => {
-      L.marker([place.lat, place.lon])
-        .addTo(map)
-        .bindPopup(`<b>${place.name}</b><br>${place.category}`);
-    });
-  });
