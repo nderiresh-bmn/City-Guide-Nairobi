@@ -1,63 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Nairobi City Guide</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f9f4;
+      margin: 0;
+      padding: 0;
+    }
+    header, footer {
+      background: #228B22;
+      color: #fff;
+      text-align: center;
+      padding: 1em 0;
+    }
+    .container {
+      display: flex;
+      min-height: 80vh;
+    }
+    nav {
+      min-width: 200px;
+      background: #2e8b57;
+      color: #fff;
+      padding: 1.5em 0.5em;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+    nav li {
+      padding: 0.8em 1em;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-bottom: 0.5em;
+      transition: background 0.2s;
+    }
+    nav li.active, nav li:hover {
+      background: #43a047;
+      font-weight: bold;
+    }
+    main {
+      flex: 1;
+      padding: 2em 2em 2em 2em;
+      background: #fff;
+      border-radius: 0 10px 10px 0;
+      min-height: 75vh;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5em;
+    }
+    .category-title {
+      font-size: 1.6em;
+      margin-bottom: 0.3em;
+      color: #228B22;
+    }
+    .spot-list {
+      list-style: none;
+      padding: 0;
+    }
+    .spot-list li {
+      padding: 0.6em 0.5em;
+      border-bottom: 1px solid #e0e0e0;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .spot-list li.active, .spot-list li:hover {
+      background: #e6fbe6;
+      font-weight: bold;
+    }
+    .pricing {
+      background: #e5ffe5;
+      border: 1px solid #b6eab5;
+      color: #228B22;
+      padding: 0.5em 1em;
+      border-radius: 4px;
+      margin-bottom: 1em;
+      display: inline-block;
+    }
+    .map-container {
+      width: 100%;
+      height: 300px;
+      margin: 1em 0;
+      border: 2px solid #228B22;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .blog-section {
+      margin-top: 1.2em;
+      background: #f0fff4;
+      padding: 1em;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px #eee;
+    }
+    .footer-contact a {
+      color: #fff;
+      text-decoration: underline;
+    }
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
+      nav {
+        min-width: 100%;
+        display: flex;
+        overflow-x: auto;
+      }
+      nav ul {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5em;
+        width: 100%;
+        margin: 0;
+      }
+      nav li {
+        min-width: 120px;
+        text-align: center;
+        margin-bottom: 0;
+      }
+      main {
+        border-radius: 0;
+        padding: 1em;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
     <h1>Nairobi City Guide</h1>
-    <nav>
-      <button class="tab-btn" data-tab="living">Living</button>
-      <button class="tab-btn" data-tab="shopping">Shopping</button>
-      <button class="tab-btn" data-tab="restaurants">Restaurants</button>
-      <button class="tab-btn" data-tab="nightlife">Nightlife</button>
-      <button class="tab-btn" data-tab="news">News</button>
-      <button class="tab-btn" data-tab="contact">Contact</button>
-    </nav>
   </header>
+  <div class="container">
+    <nav>
+      <ul id="category-list"></ul>
+    </nav>
+    <main>
+      <div>
+        <div class="category-title" id="category-title"></div>
+        <p id="category-description"></p>
+        <div class="pricing" id="category-pricing" style="display:none;"></div>
+        <ul class="spot-list" id="spot-list"></ul>
+        <div class="map-container" id="map"></div>
+      </div>
+      <section class="blog-section">
+        <h3>Latest from Nairobi City Guide Blog</h3>
+        <iframe src="https://nairobicityguide.blogspot.com/" width="100%" height="320" style="border:none;"></iframe>
+      </section>
+    </main>
+  </div>
+  <footer>
+    <div class="footer-contact">
+      Contact: <a href="mailto:infotroystrategic@gmail.com">infotroystrategic@gmail.com</a>
+    </div>
+    <div style="margin-top:0.5em;font-size:0.9em;">&copy; 2025 Nairobi City Guide</div>
+  </footer>
 
-  <main>
-    <section id="living" class="tab-content active">
-      <h2>Living in Nairobi</h2>
-      <p>Find the best neighborhoods, housing options, and lifestyle tips for Nairobi.</p>
-    </section>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // ---- SPOTS DATA ----
+    const spotsData = {
+      "Living": {
+        "description": "Broadwalk Mall - a hybrid residence with all you could need during your stay including a pharmacy, supermarket, bookshop, restaurant, nightclub and many other stalls.",
+        "spots": [
+          {
+            "name": "Broadwalk Mall",
+            "lat": -1.2648,
+            "lng": 36.8006,
+            "details": "A hybrid residence with all amenities for your stay."
+          }
+        ]
+      },
+      "Nightlife": {
+        "description": "Woodvale Grove - enjoy the liveliest street in Nairobi Westlands Area with many nightlife options at fair prices.",
+        "pricing": "25 dollars per person for guided nightlife tour",
+        "spots": [
+          {
+            "name": "Woodvale Grove",
+            "lat": -1.2633,
+            "lng": 36.8035,
+            "details": "Lively street in Westlands with many nightlife options."
+          }
+        ]
+      },
+      "Restaurants": {
+        "description": "From known places like Hyatt to hidden gems like Gursha and unrated Nyama choma places, we guide you to sample the different dishes available in Nairobi.",
+        "spots": [
+          {
+            "name": "Hyatt Nairobi",
+            "lat": -1.2866,
+            "lng": 36.8172,
+            "details": "Luxury dining experience in the heart of Nairobi."
+          },
+          {
+            "name": "Gursha Ethiopian Restaurant",
+            "lat": -1.2907,
+            "lng": 36.8172,
+            "details": "Hidden gem for Ethiopian cuisine."
+          },
+          {
+            "name": "Local Nyama Choma Spot",
+            "lat": -1.2700,
+            "lng": 36.8000,
+            "details": "Unrated but authentic Nyama Choma experience."
+          }
+        ]
+      },
+      "Walking Tours": {
+        "description": "Take a stroll from Westlands, to the Nairobi landmarks and art installations. There is nothing like a good strong stroll in the land of marathoners.",
+        "pricing": "25 dollars per person for guided walking tour",
+        "spots": [
+          {
+            "name": "Nairobi National Museum",
+            "lat": -1.2667,
+            "lng": 36.8128,
+            "details": "Major museum showcasing Kenyan history and culture."
+          },
+          {
+            "name": "National Broadcaster KBC",
+            "lat": -1.2850,
+            "lng": 36.8219,
+            "details": "Historic site, scene of the 1982 attempted coup."
+          },
+          {
+            "name": "University of Nairobi",
+            "lat": -1.2798,
+            "lng": 36.8166,
+            "details": "Kenya's largest university, established 1956."
+          },
+          {
+            "name": "Jevanjee Gardens",
+            "lat": -1.2845,
+            "lng": 36.8221,
+            "details": "Public park in Nairobi."
+          },
+          {
+            "name": "Parliament of Kenya",
+            "lat": -1.2921,
+            "lng": 36.8219,
+            "details": "Legislative building of Kenya."
+          }
+        ]
+      },
+      "Shopping": {
+        "description": "We guide you to shop from Nairobi local designers as well as known brands available in Nairobi. (Specific brands will be added as partnerships are established.)",
+        "spots": []
+      },
+      "Review Centre": {
+        "description": "Share your experiences or read reviews from other visitors. (Feature implementation to be discussed)",
+        "spots": []
+      }
+    };
 
-    <section id="shopping" class="tab-content">
-      <h2>Shopping</h2>
-      <p>Discover top malls, boutiques, and local markets around Nairobi.</p>
-    </section>
+    // ---- UI LOGIC ----
+    let currentCategory = Object.keys(spotsData)[0];
+    let currentSpotIdx = null;
+    let map = null;
+    let markers = [];
 
-    <section id="restaurants" class="tab-content">
-      <h2>Restaurants</h2>
-      <p>Explore Nairobi’s diverse food scene, from street eats to fine dining.</p>
-    </section>
+    function renderCategories() {
+      const ul = document.getElementById('category-list');
+      ul.innerHTML = '';
+      Object.keys(spotsData).forEach(cat => {
+        const li = document.createElement('li');
+        li.textContent = cat;
+        li.className = (cat === currentCategory) ? 'active' : '';
+        li.onclick = () => {
+          currentCategory = cat;
+          currentSpotIdx = null;
+          renderCategoryContent();
+        };
+        ul.appendChild(li);
+      });
+    }
 
-    <section id="nightlife" class="tab-content">
-      <h2>Nightlife</h2>
-      <p>Bars, lounges, and clubs where Nairobi comes alive at night.</p>
-    </section>
+    function renderCategoryContent() {
+      const data = spotsData[currentCategory];
+      document.getElementById('category-title').textContent = currentCategory;
+      document.getElementById('category-description').textContent = data.description || '';
 
-    <section id="news" class="tab-content">
-      <h2>City News & Blog</h2>
-      <iframe src="https://nairobicityguide.blogspot.com/" 
-              style="width:100%; height:600px; border:none;">
-      </iframe>
-    </section>
+      const pricingDiv = document.getElementById('category-pricing');
+      if (data.pricing) {
+        pricingDiv.style.display = '';
+        pricingDiv.textContent = `Pricing: ${data.pricing}`;
+      } else {
+        pricingDiv.style.display = 'none';
+      }
 
-    <section id="contact" class="tab-content">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:infotroystrategic@gmail.com">infotroystrategic@gmail.com</a></p>
-    </section>
+      const spotList = document.getElementById('spot-list');
+      spotList.innerHTML = '';
+      if (data.spots && data.spots.length > 0) {
+        data.spots.forEach((spot, idx) => {
+          const li = document.createElement('li');
+          li.innerHTML = `<strong>${spot.name}</strong><div style="font-size:0.97em;">${spot.details}</div>`;
+          li.className = (currentSpotIdx === idx) ? 'active' : '';
+          li.onclick = () => {
+            currentSpotIdx = idx;
+            renderCategoryContent();
+          };
+          spotList.appendChild(li);
+        });
+      }
 
-    <section id="map-section">
-      <h2>Interactive Map</h2>
-      <div id="map"></div>
-    </section>
-  </main>
+      // Map logic
+      renderMap(data.spots);
+
+      // If Review Centre, show a simple message
+      if (currentCategory === "Review Centre") {
+        spotList.innerHTML = `<li style="background:#e6fbe6;">Review feature coming soon!<br>
+        Email your feedback to <a href="mailto:infotroystrategic@gmail.com">infotroystrategic@gmail.com</a>.</li>`;
+      }
+    }
+
+    function renderMap(spots) {
+      if (!window.L) return;
+      const mapDiv = document.getElementById('map');
+      mapDiv.innerHTML = ""; // Clear for re-render
+
+      // Default center: Nairobi
+      let center = [-1.286389, 36.817223];
+      let zoom = 13;
+
+      // If a spot is selected, center on it
+      if (spots && spots.length > 0 && currentSpotIdx !== null) {
+        center = [spots[currentSpotIdx].lat, spots[currentSpotIdx].lng];
+        zoom = 15;
+      } else if (spots && spots.length > 0) {
+        center = [spots[0].lat, spots[0].lng];
+        zoom = 13;
+      }
+
+      // Create map
+      map = L.map('map').setView(center, zoom);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      // Add markers
+      markers = [];
+      if (spots && spots.length > 0) {
+        spots.forEach((spot, idx) => {
+          const marker = L.marker([spot.lat, spot.lng]).addTo(map)
+            .bindPopup(`<strong>${spot.name}</strong><br>${spot.details}`);
+          if (currentSpotIdx === idx) marker.openPopup();
+          markers.push(marker);
+        });
+      }
+    }
+
+    // ---- INIT ----
+    renderCategories();
+    renderCategoryContent();
+  </script>
 </body>
 </html>
