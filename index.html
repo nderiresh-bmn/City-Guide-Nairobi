@@ -8,14 +8,31 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Top Category Bar & Blog Button -->
+  <div class="topbar">
+    <nav class="category-nav">
+      <a href="#living">Living</a>
+      <a href="#restaurants">Restaurants</a>
+      <a href="#nightlife">Nightlife</a>
+      <a href="#fitness-buddy">Walk & Fitness Buddy</a>
+    </nav>
+    <button id="blog-btn" class="blog-btn">News Blog</button>
+  </div>
+  <!-- Blog Embed (hidden by default) -->
+  <div id="blog-embed-container" class="blog-embed-container">
+    <div class="blog-embed-header">
+      <span>City Guide Nairobi News Blog</span>
+      <button id="close-blog" class="close-blog">&times;</button>
+    </div>
+    <iframe src="https://nairobicityguide.blogspot.com" title="Nairobi City Guide Blog"></iframe>
+  </div>
+
   <header>
     <div class="container">
       <h1>City Guide Nairobi</h1>
       <nav>
         <a href="#overview">Home</a>
-        <a href="#categories">Categories</a>
         <a href="#services">Services</a>
-        <a href="https://nairobicityguide.blogspot.com" target="_blank" rel="noopener">Blog</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -43,37 +60,29 @@
       </ul>
     </section>
     
-    <section id="categories" class="container">
-      <h2>Categories</h2>
-      <div class="category-grid">
-        <div class="category-card" id="living">
-          <h3>Living</h3>
-          <div class="category-content">
-            <!-- Add Living content here -->
-            <p>Information and tips about settling down, housing, and daily life in Nairobi. <span class="add-link">[Add more]</span></p>
-          </div>
-        </div>
-        <div class="category-card" id="restaurants">
-          <h3>Restaurants</h3>
-          <div class="category-content">
-            <!-- Add Restaurants content here -->
-            <p>Explore Nairobi’s diverse culinary scene, from local eateries to fine dining. <span class="add-link">[Add more]</span></p>
-          </div>
-        </div>
-        <div class="category-card" id="nightlife">
-          <h3>Nightlife</h3>
-          <div class="category-content">
-            <!-- Add Nightlife content here -->
-            <p>Find the best spots for music, dancing, and socializing after dark. <span class="add-link">[Add more]</span></p>
-          </div>
-        </div>
-        <div class="category-card" id="fitness-buddy">
-          <h3>Walk and Fitness Buddy</h3>
-          <div class="category-content">
-            <!-- Add Walk and Fitness Buddy content here -->
-            <p>Join group walks, find jogging partners, and discover fitness activities. <span class="add-link">[Add more]</span></p>
-          </div>
-        </div>
+    <!-- Category Content Sections (for easy future editing) -->
+    <section id="living" class="container category-section">
+      <h2>Living</h2>
+      <div class="category-content">
+        <p>Information and tips about settling down, housing, and daily life in Nairobi. <span class="add-link">[Add more]</span></p>
+      </div>
+    </section>
+    <section id="restaurants" class="container category-section">
+      <h2>Restaurants</h2>
+      <div class="category-content">
+        <p>Explore Nairobi’s diverse culinary scene, from local eateries to fine dining. <span class="add-link">[Add more]</span></p>
+      </div>
+    </section>
+    <section id="nightlife" class="container category-section">
+      <h2>Nightlife</h2>
+      <div class="category-content">
+        <p>Find the best spots for music, dancing, and socializing after dark. <span class="add-link">[Add more]</span></p>
+      </div>
+    </section>
+    <section id="fitness-buddy" class="container category-section">
+      <h2>Walk & Fitness Buddy</h2>
+      <div class="category-content">
+        <p>Join group walks, find jogging partners, and discover fitness activities. <span class="add-link">[Add more]</span></p>
       </div>
     </section>
   </main>
