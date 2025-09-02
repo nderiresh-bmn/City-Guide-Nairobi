@@ -1,3 +1,43 @@
+// Review Centre Carousel
+let reviews = [
+  // Example reviews; you can remove these as real reviews are added
+  { name: "Jane", category: "Living", text: "City Guide Nairobi made my move so much easier!" },
+  { name: "Paul", category: "Restaurants", text: "Discovered amazing restaurants thanks to this guide." },
+  { name: "Aisha", category: "Nightlife", text: "Loved the nightlife itinerary - great choices!" }
+];
+let currentReview = 0;
+const reviewSlide = document.querySelector('.review-slide');
+const prevBtn = document.querySelector('.carousel-control.prev');
+const nextBtn = document.querySelector('.carousel-control.next');
+
+function showReview(index) {
+  if (reviews.length === 0) {
+    reviewSlide.innerHTML = "<em>No reviews yet. Be the first to share your experience!</em>";
+    return;
+  }
+  const r = reviews[index];
+  reviewSlide.innerHTML = `<strong>${r.name}</strong> <span style="color:#670E36;font-weight:600;">[${r.category}]</span><br><span>${r.text}</span>`;
+}
+function nextReview() {
+  if (reviews.length === 0) return;
+  currentReview = (currentReview + 1) % reviews.length;
+  showReview(currentReview);
+}
+function prevReview() {
+  if (reviews.length === 0) return;
+  currentReview = (currentReview - 1 + reviews.length) % reviews.length;
+  showReview(currentReview);
+}
+nextBtn.addEventListener('click', nextReview);
+prevBtn.addEventListener('click', prevReview);
+
+// Auto-slide every 5 seconds
+setInterval(nextReview, 5000);
+
+// Initial display
+showReview(currentReview);
+
+// Handle review form submissions
 document.getElementById('review-form').addEventListener('submit', function (e) {
   e.preventDefault();
   const name = document.getElementById('review-name').value.trim();
@@ -6,14 +46,16 @@ document.getElementById('review-form').addEventListener('submit', function (e) {
 
   if (!name || !category || !text) return;
 
-  const reviewHTML = `
-    <div class="review">
-      <div class="review-header">${name}</div>
-      <div class="review-category">${category}</div>
-      <div class="review-text">${text}</div>
-    </div>
-  `;
-  document.getElementById('reviews-list').insertAdjacentHTML('afterbegin', reviewHTML);
+  reviews.unshift({ name, category, text });
+  currentReview = 0;
+  showReview(currentReview);
 
   document.getElementById('review-form').reset();
+});
+
+// Optional: Enable [Add more] links for future content editing
+document.querySelectorAll('.add-link').forEach(link => {
+  link.addEventListener('click', () => {
+    alert("Feature to add more content coming soon!");
+  });
 });
