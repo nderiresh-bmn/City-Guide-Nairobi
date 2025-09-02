@@ -1,74 +1,113 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>City Guide Nairobi</title>
-  <!-- Link to CSS -->
-  <link rel="stylesheet" href="css/style.css">
-  <!-- Leaflet CSS for map -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
-    <h1>City Guide Nairobi</h1>
-    <nav>
-      <ul>
-        <li><a href="#news">News</a></li>
-        <li><a href="#traffic">Traffic</a></li>
-        <li><a href="#reviews">Reviews</a></li>
-        <li><a href="#culture">Culture</a></li>
-        <li><a href="#itinerary">Itinerary</a></li>
-        <li><a href="#map">Map</a></li>
-      </ul>
-    </nav>
+    <div class="container">
+      <h1>City Guide Nairobi</h1>
+      <nav>
+        <a href="#overview">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#services">Services</a>
+        <a href="https://nairobicityguide.blogspot.com" target="_blank" rel="noopener">Blog</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
-
+  
   <main>
-    <section id="news">
-      <h2>News</h2>
-      <p>Latest Nairobi news will go here...</p>
+    <section id="overview" class="container">
+      <h2>Welcome to City Guide Nairobi</h2>
+      <p>
+        Nairobi, the vibrant heart of Kenya, is a city where cultures meet, innovation thrives, and urban life pulses with energy. From lush parks and wildlife sanctuaries to bustling markets and modern skyscrapers, Nairobi offers a unique blend of adventure, business, and leisure for locals and visitors alike.
+      </p>
+      <h3>Our Vision</h3>
+      <p>
+        City Guide Nairobi is dedicated to providing a trusted, comprehensive, and user-friendly digital platform for exploring the best places, experiences, and services in Nairobi. Our vision is to empower residents, newcomers, and tourists with reliable information, curated recommendations, and a thriving community voice.
+      </p>
     </section>
-
-    <section id="traffic">
-      <h2>Traffic Updates</h2>
-      <p>Live traffic updates coming soon...</p>
+    
+    <section id="services" class="container">
+      <h2>Our Services</h2>
+      <ul class="services-list">
+        <li><strong>Renting Guide:</strong> Find the best tips and resources for renting in Nairobi.</li>
+        <li><strong>Tourist Stay Recommendation:</strong> Handpicked stays and local experiences for an unforgettable visit.</li>
+        <li><strong>Nightlife Itinerary:</strong> Discover Nairobi’s vibrant nightlife with curated itineraries.</li>
+        <li><strong>Walk and Jog Route Itinerary:</strong> Explore safe and scenic routes for walking and jogging around the city.</li>
+      </ul>
     </section>
-
-    <section id="reviews">
-      <h2>Restaurant Reviews</h2>
-      <p>Top restaurants and dining spots...</p>
-    </section>
-
-    <section id="culture">
-      <h2>Arts & Culture</h2>
-      <p>Discover Nairobi’s creative scene...</p>
-    </section>
-
-    <section id="itinerary">
-      <h2>Tourist Itinerary</h2>
-      <p>Plan your Nairobi adventure...</p>
-    </section>
-
-    <section id="map">
-      <h2>Explore Nairobi</h2>
-      <div id="mapid"></div>
-      <div class="map-filters">
-        <button onclick="toggleLayer('spots')">Tourist Spots</button>
-        <button onclick="toggleLayer('restaurants')">Restaurants</button>
-        <button onclick="toggleLayer('nightlife')">Nightlife</button>
-        <button onclick="toggleLayer('accommodation')">Accommodation</button>
+    
+    <section id="categories" class="container">
+      <h2>Categories</h2>
+      <div class="category-grid">
+        <div class="category-card" id="living">
+          <h3>Living</h3>
+          <div class="category-content">
+            <!-- Add Living content here -->
+            <p>Information and tips about settling down, housing, and daily life in Nairobi. <span class="add-link">[Add more]</span></p>
+          </div>
+        </div>
+        <div class="category-card" id="restaurants">
+          <h3>Restaurants</h3>
+          <div class="category-content">
+            <!-- Add Restaurants content here -->
+            <p>Explore Nairobi’s diverse culinary scene, from local eateries to fine dining. <span class="add-link">[Add more]</span></p>
+          </div>
+        </div>
+        <div class="category-card" id="nightlife">
+          <h3>Nightlife</h3>
+          <div class="category-content">
+            <!-- Add Nightlife content here -->
+            <p>Find the best spots for music, dancing, and socializing after dark. <span class="add-link">[Add more]</span></p>
+          </div>
+        </div>
+        <div class="category-card" id="fitness-buddy">
+          <h3>Walk and Fitness Buddy</h3>
+          <div class="category-content">
+            <!-- Add Walk and Fitness Buddy content here -->
+            <p>Join group walks, find jogging partners, and discover fitness activities. <span class="add-link">[Add more]</span></p>
+          </div>
+        </div>
       </div>
     </section>
   </main>
-
+  
   <footer>
-    <p>&copy; 2025 City Guide Nairobi</p>
+    <div class="container">
+      <section id="review-centre">
+        <h2>Review Centre</h2>
+        <form id="review-form">
+          <input type="text" id="review-name" placeholder="Your Name" required>
+          <select id="review-category" required>
+            <option value="">Select Category</option>
+            <option value="Living">Living</option>
+            <option value="Restaurants">Restaurants</option>
+            <option value="Nightlife">Nightlife</option>
+            <option value="Walk and Fitness Buddy">Walk and Fitness Buddy</option>
+          </select>
+          <textarea id="review-text" rows="3" placeholder="Share your experience..." required></textarea>
+          <button type="submit">Submit Review</button>
+        </form>
+        <div id="review-carousel">
+          <div class="review-slide"></div>
+          <button class="carousel-control prev">&lt;</button>
+          <button class="carousel-control next">&gt;</button>
+        </div>
+      </section>
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:infotroystrategic@gmail.com">infotroystrategic@gmail.com</a></p>
+      </section>
+      <p class="copyright">&copy; 2025 City Guide Nairobi</p>
+    </div>
   </footer>
-
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <!-- Custom JS -->
-  <script src="js/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
