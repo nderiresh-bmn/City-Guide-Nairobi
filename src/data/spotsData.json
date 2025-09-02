@@ -1,0 +1,92 @@
+{
+  "Living": {
+    "description": "Broadwalk Mall - a hybrid residence with all you could need during your stay including a pharmacy, supermarket, bookshop, restaurant, nightclub and many other stalls.",
+    "spots": [
+      {
+        "name": "Broadwalk Mall",
+        "lat": -1.2648,
+        "lng": 36.8006,
+        "details": "A hybrid residence with all amenities for your stay."
+      }
+    ]
+  },
+  "Nightlife": {
+    "description": "Woodvale Grove - enjoy the liveliest street in Nairobi Westlands Area with many nightlife options at fair prices.",
+    "pricing": "25 dollars per person for guided nightlife tour",
+    "spots": [
+      {
+        "name": "Woodvale Grove",
+        "lat": -1.2633,
+        "lng": 36.8035,
+        "details": "Lively street in Westlands with many nightlife options."
+      }
+    ]
+  },
+  "Restaurants": {
+    "description": "From known places like Hyatt to hidden gems like Gursha and unrated Nyama choma places, we guide you to sample the different dishes available in Nairobi.",
+    "spots": [
+      {
+        "name": "Hyatt Nairobi",
+        "lat": -1.2866,
+        "lng": 36.8172,
+        "details": "Luxury dining experience in the heart of Nairobi."
+      },
+      {
+        "name": "Gursha Ethiopian Restaurant",
+        "lat": -1.2907,
+        "lng": 36.8172,
+        "details": "Hidden gem for Ethiopian cuisine."
+      },
+      {
+        "name": "Local Nyama Choma Spot",
+        "lat": -1.2700,
+        "lng": 36.8000,
+        "details": "Unrated but authentic Nyama Choma experience."
+      }
+    ]
+  },
+  "Walking Tours": {
+    "description": "Take a stroll from Westlands, to the Nairobi landmarks and art installations. There is nothing like a good strong stroll in the land of marathoners.",
+    "pricing": "25 dollars per person for guided walking tour",
+    "spots": [
+      {
+        "name": "Nairobi National Museum",
+        "lat": -1.2667,
+        "lng": 36.8128,
+        "details": "Major museum showcasing Kenyan history and culture."
+      },
+      {
+        "name": "National Broadcaster KBC",
+        "lat": -1.2850,
+        "lng": 36.8219,
+        "details": "Historic site, scene of the 1982 attempted coup."
+      },
+      {
+        "name": "University of Nairobi",
+        "lat": -1.2798,
+        "lng": 36.8166,
+        "details": "Kenya's largest university, established 1956."
+      },
+      {
+        "name": "Jevanjee Gardens",
+        "lat": -1.2845,
+        "lng": 36.8221,
+        "details": "Public park in Nairobi."
+      },
+      {
+        "name": "Parliament of Kenya",
+        "lat": -1.2921,
+        "lng": 36.8219,
+        "details": "Legislative building of Kenya."
+      }
+    ]
+  },
+  "Shopping": {
+    "description": "We guide you to shop from Nairobi local designers as well as known brands available in Nairobi. (Specific brands will be added as partnerships are established.)",
+    "spots": []
+  },
+  "Review Centre": {
+    "description": "Share your experiences or read reviews from other visitors. (Feature implementation to be discussed)",
+    "spots": []
+  }
+}
